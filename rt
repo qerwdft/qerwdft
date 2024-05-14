@@ -1,0 +1,60 @@
+# 加载chromedriver驱动成功时执行的操作
+    if load_driver_success:
+
+        try:
+            # 浏览网页
+            browser.get('https://movie.douban.com/subject_search?search_text=' + urllib.parse.quote(key_word) + '&cat=1002')  # get方式获取返回数据
+            # js动态渲染的网页,必须等到搜索结果元素(DIV中class=root)出来后，才可以停止加载网页
+            # 等待DIV中class=root的元素出现
+            wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '.root')))
+
+            dr = browser.find_elements(by=By.XPATH, value="//div[@class='item-root']") # 获取class为item-root的DIV(因为有多个结果)
+            jsonData = []
+            res_list = []
+            for son in dr:
+                movieData = {'rating': ['', 'null'], 'cover_url': '', 'types': '', 'title': '', 'url': '', 'release_date': '', 'vote_count': '', 'actors': ''}
+                sub_list = ['', '', '', '']
+
+                url_element = son.find_elements(by=By.XPATH, value=".//a")  # 获取第一个a标签的url(因为有多个结果)
+                if url_element:
+                    movieData['url'] = (url_element[0].get_attribute("href"))
+
+                img_url_element = url_element[0].find_elements(by=By.XPATH, value=".//img")  # 获取影片海报图片地址
+                if img_url_element:
+                    movieData['cover_url'] = (img_url_element[0].get_attribute("src"))
+
+                title_element = son.find_elements(by=By.XPATH, value=".//div[@class='title']")  # 获取标题
+                if title_element:
+                    temp_title = title_element[0].text
+                    movieData['title'] = (temp_title.split('('))[0]
+                    movieData['release_date'] = temp_title[temp_title.find('(') + 1:temp_title.find(')')]
+                    sub_list[0] = movieData['title']
+
+                rating_element = son.find_elements(by=By.XPATH, value=".//span[@class='rating_nums']")  # 获取评分
+                if rating_element:
+                    movieData['rating'][0] = rating_element[0].text
+                    sub_list[1] = movieData['rating'][0]
+
+                vote_element = son.find_elements(by=By.XPATH, value=".//span[@class='pl']")  # 获取数量
+                if vote_element:
+                    movieData['vote_count'] = vote_element[0].text.replace('(', '').replace(')', '').replace('人评价', '')
+                    sub_list[3] = movieData['vote_count']
+
+                type_element = son.find_elements(by=By.XPATH, value=".//div[@class='meta abstract']")  # 获取类型
+                if type_element:
+                    movieData['types'] = type_element[0].text
+                    sub_list[2] = movieData['types']
+
+                actors_element = son.find_elements(by=By.XPATH, value=".//div[@class='meta abstract_2']")  # 获取演员
+                if actors_element:
+                    movieData['actors'] = actors_element[0].text
+
+                jsonData.append(movieData)
+                res_list.append(sub_list)
+
+            for data in res_list:
+                print(data)
+
+            browser.quit()  # 关闭浏览器
+
+            return [res_list, jsonData]
