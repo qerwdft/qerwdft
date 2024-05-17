@@ -1,0 +1,50 @@
+    # 从dict_common_in结果中取出前n大个数据
+    n = 0
+
+    if(len(dict_common_in) > 5):
+        n = 6
+    elif(len(dict_common_in) > 4):
+        n = 5
+    elif(len(dict_common_in) > 3):
+        n = 4
+    elif(len(dict_common_in) > 2):
+        n = 3
+    elif(len(dict_common_in) > 1):
+        n = 2
+    elif(len(dict_common_in) > 0):
+        n = 1
+
+    # 排序，并转化为list
+    sort_list = sorted(dict_common_in.items(), key=lambda item: item[1], reverse=True)
+
+    # 取出前n大的值
+    sort_list = sort_list[:n]
+
+    bar = Bar()
+    bar.add_xaxis([x[0] for x in sort_list])
+    bar.add_yaxis("共同所在群聊分析", [x[1] for x in sort_list])
+    bar.render('data/共同所在群聊分析.html')
+
+
+# 运行前，请先确保安装了所需库文件
+# 若没安装，请执行以下命令:pip install -r requirement.txt
+if __name__ == '__main__':
+
+    # 初始化所需文件夹
+    init_folders()
+
+
+    # 启动微信机器人，自动根据操作系统执行不同的指令
+    if('Windows' in system()):
+        # Windows
+        bot = Bot()
+    elif('Darwin' in system()):
+        # MacOSX
+        bot = Bot(cache_path=True)
+    elif('Linux' in system()):
+        # Linux
+        bot = Bot(console_qr=2,cache_path=True)
+    else:
+        # 自行确定
+        print(u"无法识别你的操作系统类型，请自己设置")
+        exit()
