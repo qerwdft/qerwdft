@@ -1,0 +1,85 @@
+        # 查询按钮
+        #lambda表示绑定的函数需要带参数，请勿删除lambda，否则会出现异常
+        #thread_it表示新开启一个线程执行这个函数，防止GUI界面假死无响应
+        B_0 = Button(labelframe, text="从排行榜搜索")
+        B_0.place(x=560, y=10)
+        self.B_0 = B_0
+
+
+
+        # 框架布局，承载多个控件
+        frame_root = Frame(labelframe, width=400)
+        frame_l = Frame(frame_root)
+        frame_r = Frame(frame_root)
+        self.frame_root = frame_root
+        self.frame_l = frame_l
+        self.frame_r = frame_r
+
+
+        # 表格
+        columns = ("影片名字", "影片评分", "同类排名", "评价人数")
+        treeview = ttk.Treeview(frame_l, height=10, show="headings", columns=columns)
+
+        treeview.column("影片名字", width=210, anchor='center')  # 表示列,不显示
+        treeview.column("影片评分", width=210, anchor='center')
+        treeview.column("同类排名", width=100, anchor='center')
+        treeview.column("评价人数", width=100, anchor='center')
+
+        treeview.heading("影片名字", text="影片名字")  # 显示表头
+        treeview.heading("影片评分", text="影片评分")
+        treeview.heading("同类排名", text="同类排名")
+        treeview.heading("评价人数", text="评价人数")
+
+
+
+        #垂直滚动条
+        vbar = ttk.Scrollbar(frame_r, command=treeview.yview)
+        treeview.configure(yscrollcommand=vbar.set)
+
+        treeview.pack()
+        self.treeview = treeview
+        vbar.pack(side=RIGHT, fill=Y)
+        self.vbar = vbar
+
+        # 框架的位置布局
+        frame_l.grid(row=0, column=0, sticky=NSEW)
+        frame_r.grid(row=0, column=1, sticky=NS)
+        frame_root.place(x=5, y=70)
+
+        # 从排行榜 电影搜索布局结束
+
+
+
+
+
+
+
+
+
+
+        # 输入关键字 电影搜索布局开始
+
+        # 影片名称
+        L_vote_keyword = Label(labelframe, text='影片名称')
+        L_vote_keyword.place(x=0, y=40)
+        #L_vote_keyword.grid(row=0,column=0)
+        self.L_vote_keyword = L_vote_keyword
+
+        # 文本框
+        T_vote_keyword = Entry(labelframe, width=53)
+        T_vote_keyword.delete(0, END)
+        T_vote_keyword.insert(0, '我不是药神')
+        T_vote_keyword.place(x=66, y=37)
+        self.T_vote_keyword = T_vote_keyword
+
+
+        # 查询按钮
+        #lambda表示绑定的函数需要带参数，请勿删除lambda，否则会出现异常
+        #thread_it表示新开启一个线程执行这个函数，防止GUI界面假死无响应
+        B_0_keyword = Button(labelframe, text="从关键字搜索")
+        B_0_keyword.place(x=560, y=40)
+        self.B_0_keyword = B_0_keyword
+
+        # 输入关键字 电影搜索布局结束
+
+
