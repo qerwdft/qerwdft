@@ -1,0 +1,9 @@
+def appendFirework():
+    f = firework(random.randint(100, w-100), h, (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
+    fireworks.append(f)
+    root.after(random.randint(100, 1000), appendFirework)
+
+def heart_function(theta):
+    x = 16 * math.sin(theta) ** 3
+    y = 13 * math.cos(theta) - 5 * math.cos(2*theta) - 2 * math.cos(3*theta) - math.cos(4*theta)
+    return (x, -y)
