@@ -1,0 +1,37 @@
+ /**
+   * Collect dependencies on array elements when the array is touched, since
+   * we cannot intercept array element access like property getters.
+   */
+  function dependArray (value) {
+    for (var e = (void 0), i = 0, l = value.length; i < l; i++) {
+      e = value[i];
+      e && e.__ob__ && e.__ob__.dep.depend();
+      if (Array.isArray(e)) {
+        dependArray(e);
+      }
+    }
+  }
+
+  /*  */
+
+  /**
+   * Option overwriting strategies are functions that handle
+   * how to merge a parent option value and a child option
+   * value into the final value.
+   */
+  var strats = config.optionMergeStrategies;
+
+  /**
+   * Options with restrictions
+   */
+  {
+    strats.el = strats.propsData = function (parent, child, vm, key) {
+      if (!vm) {
+        warn(
+          "option \"" + key + "\" can only be used during instance " +
+          'creation with the `new` keyword.'
+        );
+      }
+      return defaultStrat(parent, child)
+    };
+  }
