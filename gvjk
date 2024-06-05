@@ -1,0 +1,15 @@
+public class Box<T> {
+    private T t;
+
+    public void set(T t) {
+        this.t = t;
+    }
+
+    public T get() {
+        return t;
+    }
+}
+
+Box<Integer> integerBox = new Box<>();
+integerBox.set(10);
+System.out.println(integerBox.get()); // 应输出：10
