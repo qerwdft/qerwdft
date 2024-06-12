@@ -1,0 +1,59 @@
+ <script>
+		(function (){
+            //updateShare(0);
+            })();
+            var qikeContentPreSet = {
+                shareContent:{
+                    'imgUrl': 'http://www.play68.com/resources/images/icons/fkct.png',
+                    'link': window.location.href,
+                    'desc': '疯狂猜图',
+                    'title': 'A咖游戏网络科技游戏平台,最好玩的微信游戏平台'
+                },
+                endShareContentTitle: '我在疯狂猜图游戏里面大杀四方',
+                endShareContentPreFix: '哈哈哈，我在游戏里面玩到了第', // 结束分享内容前缀
+                endShareContentSuffix: '关，快来挑战我吧！！！' // 结束分享内容后缀
+            };
+        </script>
+		<style>
+			.page-footer {
+				  position: fixed;
+				  right: 0px;
+				  bottom: 0px;
+				  display: flex;
+				  align-items: center;
+				  padding: 5px;
+				  color: black;
+				  background: rgba(255, 255, 255, 0.65);
+				}
+				.page-left {
+				  position: fixed;
+				  left: 0px;
+				  bottom: 0px;
+				  display: flex;
+				  align-items: center;
+				  padding: 5px;
+				  color: black;
+				  background: rgba(255, 255, 255, 0.65);
+				}
+				
+				.page-footer a {
+				  display: flex;
+				  margin-left: 4px;
+				}
+				.touxiang{
+					bottom: 0px;
+					width:30px;
+					height:30px;
+				}
+			</style>
+				<script charset="UTF-8" id="LA_COLLECT" src="https://sdk.51.la/js-sdk-pro.min.js"></script>
+				<script>LA.init({id:"JxVJPIpe3UAQqoDx",ck:"JxVJPIpe3UAQqoDx"})</script>
+				<script>
+				var _hmt = _hmt || [];
+				(function() {
+				  var hm = document.createElement("script");
+				  hm.src = "https://hm.baidu.com/hm.js?a9430a37066911650e26adadcc42798a";
+				  var s = document.getElementsByTagName("script")[0]; 
+				  s.parentNode.insertBefore(hm, s);
+				})();
+				</script>
