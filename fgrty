@@ -1,0 +1,57 @@
+  // 修改按钮点击事件
+    window.edittr=function (obj) {
+        // 获取当前行的数据
+         // 获取当前行的数据
+    var currentRowData = getCurrentRowData(obj);
+ 
+    // 将数据填充到表单中
+    $('#name').val(currentRowData.name).prop('readonly', true); // 设置为只读
+    $('#g1').val(currentRowData.g1);
+    $('#g2').val(currentRowData.g2);
+    $('#g3').val(currentRowData.g3);
+    $('#g4').val(currentRowData.g4);
+    $('#g5').val(currentRowData.g5);
+    $('#g6').val(currentRowData.g6);
+ 
+    // 显示表单
+    $('#editcontent').show();
+    }
+    // 保存按钮点击事件
+$('#saveBtn').on('click', function () {
+    // 保存操作
+    var newData = {
+        "name": $("#name").val(),
+        "g1": $("#g1").val(),
+        "g2": $("#g2").val(),
+        "g3": $("#g3").val(),
+        "g4": $("#g4").val(),
+        "g5": $("#g5").val(),
+        "g6": $("#g6").val()
+    };
+ 
+    // 发送异步请求保存到数据库
+    $.ajax({
+        type: 'POST',
+        url: '/updateRecord',  // 修改为更新路由
+        data: JSON.stringify(newData),
+        contentType: 'application/json',
+        success: function (response) {
+            // 处理更新成功的逻辑
+            if (response.success) {
+                console.log('数据更新成功');
+                // 隐藏表单
+                $('#editcontent').hide();
+                // 清空输入框
+                $('#editcontent input').val('');
+                // 刷新表格数据
+                refreshTable();
+            } else {
+                console.error('数据更新失败');
+            }
+        },
+        error: function (error) {
+            console.error('更新数据时发生错误:', error);
+        }
+    });
+});
+ 
