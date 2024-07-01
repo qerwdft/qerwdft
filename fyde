@@ -1,0 +1,37 @@
+    /* 菜单按钮切屏定时器 */
+    time1= new QTimer(this);
+ 
+    //音乐按钮
+    MenuButton * music_button=new MenuButton(":/picture/music.png","",245,245);
+    music_button->setParent(this);
+    music_button->move(400,10);
+    //音乐按钮按下处理
+    connect(music_button,&MenuButton::clicked,[=](){
+        /* 设计动作图标 */
+        music_button->zoom1();//弹跳
+        music_button->zoom2();
+        /* 延迟500ms后启动播放器进程 */
+        time1->start(500);
+        connect(time1,&QTimer::timeout,[=](){
+            time1->stop();
+            my_pro->close();
+            my_pro->start("./QMusicPlayer");});
+        });
+ 
+ 
+    //视频按钮
+    MenuButton * video_button=new MenuButton(":/picture/bofangqi.png","",215,215);
+    //time1= new QTimer(this);
+    video_button->setParent(this);
+    video_button->move(710,20);
+    //视频按钮按下处理
+    connect(video_button,&MenuButton::clicked,[=](){
+        video_button->zoom1();//弹跳
+        video_button->zoom2();
+        time1->start(500);//定时500ms
+        connect(time1,&QTimer::timeout,[=](){
+            time1->stop(); //关闭定时器
+            my_pro->close();
+            my_pro->start("./QVideo");   });
+        });
+ 
