@@ -1,0 +1,47 @@
+    def judge_level(self):  
+        """检查关卡是否通过"""  
+        if self.step <= 0:  
+            self.type = -1  # 游戏结束  
+        if self.level == 1:  
+            if self.animal_num[4] >= 10:  # L1: 10 只青蛙  
+                self.type = 1  # 通过第一关  
+                self.num_add()  
+        elif self.level == 2:  
+            if self.animal_num[1] >= 21:  # L2: 21 只熊  
+                self.type = 1  # 通过第二关  
+                self.num_add()  
+        elif self.level == 3:  
+            if self.animal_num[4] >= 16 and self.animal_num[5] >= 16:  # L3: 16 只青蛙和 16 头牛  
+                self.type = 1  # 通过第三关  
+                self.num_add()  
+        elif self.level == 4:  
+            if self.animal_num[5] >= 18 and self.animal_num[2] >= 18:  # L4: 18 头牛和 18 只小鸡  
+                self.type = 1  # 通过第四关  
+                self.num_add()  
+        elif self.level == 5:  
+            if self.animal_num[2] >= 28 and self.animal_num[0] >= 28:  # L5: 28 只小鸡和 28 只狐狸  
+                self.type = 1  # 通过第五关  
+                self.num_add()  
+        elif self.level == 6:  
+            if self.animal_num[4] >= 70:  # L6: 70 只青蛙  
+                self.type = 1  # 通过第六关  
+                self.num_add()  
+        elif self.level == 7:  
+            if self.animal_num[2] >= 36 and self.animal_num[1] >= 36 \  
+                    and self.animal_num[0] >= 36:  # L7: 36 只小鸡、36 只熊和 36 只狐狸  
+                self.type = 1  # 通过第七关  
+                self.num_add()  
+        elif self.level == 8:  
+            if self.ice_num >= 15:  # L8: 15 冰块  
+                self.type = 1  # 通过第八关  
+                self.num_add()  
+        elif self.level == 9:  
+            if self.ice_num >= 49:  # L9: 49 冰块  
+                self.type = 1  # 通过第九关  
+                self.num_add()  
+        else:  
+            if self.ice_num >= 39:  # L10: 39 冰块  
+                self.type = 1  # 通过第十关  
+                self.num_add()  
+  
+        self.judge_next(self.type, self.score)
